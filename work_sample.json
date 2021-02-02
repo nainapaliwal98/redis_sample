@@ -1,0 +1,1197 @@
+{
+    "dashboard": {
+        "name": "Work_Sample",
+        "tags": []
+    },
+    "datasources": {
+        "4": {
+            "name": "LogiqPrometheus",
+            "options": {
+                "url": "http://prometheus-operated:9090"
+            },
+            "type": "logiq_prometheus"
+        }
+    },
+    "widgets": [
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 4,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 1,
+                    "row": 0,
+                    "sizeX": 2,
+                    "sizeY": 5
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Counter",
+                "options": {
+                    "counterColName": "value",
+                    "defaultColumns": 2,
+                    "defaultRows": 5,
+                    "rowNumber": 1,
+                    "stringDecChar": ".",
+                    "stringDecimal": 0,
+                    "stringThouSep": ",",
+                    "targetRowNumber": 1
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_config_maxclients",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "query=redis_config_maxclients\r\n"
+                },
+                "type": "COUNTER"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 2,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 1,
+                    "row": 0,
+                    "sizeX": 2,
+                    "sizeY": 5
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Counter",
+                "options": {
+                    "counterColName": "value",
+                    "defaultColumns": 2,
+                    "defaultRows": 5,
+                    "rowNumber": 1,
+                    "stringDecChar": ".",
+                    "stringDecimal": 0,
+                    "stringThouSep": ",",
+                    "targetColName": null,
+                    "targetRowNumber": 1
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_uptime_in_seconds",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "query=(redis_uptime_in_seconds/60)/60"
+                },
+                "type": "COUNTER"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {
+                    "duration": {
+                        "mapTo": "duration",
+                        "name": "duration",
+                        "title": "",
+                        "type": "widget-level",
+                        "value": null
+                    }
+                },
+                "position": {
+                    "autoHeight": false,
+                    "col": 0,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 5,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "value": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_cpu_sys_seconds_total",
+                    "options": {
+                        "parameters": [
+                            {
+                                "enumOptions": "1d\n2d\n3d",
+                                "global": false,
+                                "locals": [],
+                                "name": "duration",
+                                "title": "duration",
+                                "type": "enum",
+                                "value": "2d"
+                            }
+                        ]
+                    },
+                    "query": "query=rate(redis_cpu_sys_seconds_total[5m])\u0026duration={{ duration }}\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 3,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 37,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "value": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "logiq_redis_connection_usage",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "query=logiq_redis_connection_usage\u0026duration=1h\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 3,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 29,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "value": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "min-redis_allocator_rss_bytes",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "min(redis_allocator_rss_bytes)\u0026duration=1h\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 0,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 21,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "job": "series",
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "redis-metrics": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_keyspace_misses_total",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "query=rate(redis_keyspace_misses_total[5m])\u0026duration=1h\u0026step=5m\n\n\n\n\n"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 3,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 5,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "job": "series",
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "redis-metrics": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_memory_used_bytes",
+                    "options": {
+                        "parameters": [
+                            {
+                                "enumOptions": "1d\n2d\n6d",
+                                "locals": [],
+                                "name": "duration",
+                                "title": "Duration",
+                                "type": "enum",
+                                "value": "2d"
+                            }
+                        ]
+                    },
+                    "query": "query=rate(redis_memory_used_bytes[5m])\u0026duration={{ duration }}\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 0,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 1,
+                    "row": 0,
+                    "sizeX": 2,
+                    "sizeY": 5
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Counter",
+                "options": {
+                    "counterColName": "value",
+                    "defaultColumns": 2,
+                    "defaultRows": 5,
+                    "rowNumber": 1,
+                    "stringDecChar": ".",
+                    "stringDecimal": 0,
+                    "stringThouSep": ",",
+                    "targetColName": null,
+                    "targetRowNumber": 1
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_connected_clients",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "query=(redis_connected_clients)"
+                },
+                "type": "COUNTER"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 0,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 13,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "job": "series",
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "redis-metrics": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_db_keys",
+                    "options": {
+                        "parameters": [
+                            {
+                                "enumOptions": "1d\n2d\n4d",
+                                "locals": [],
+                                "name": "duration",
+                                "title": "Duration",
+                                "type": "enum",
+                                "value": "4d"
+                            }
+                        ]
+                    },
+                    "query": "query=redis_db_keys\u0026duration={{ duration }}\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {
+                    "duration": {
+                        "mapTo": "duration",
+                        "name": "duration",
+                        "title": "",
+                        "type": "widget-level",
+                        "value": null
+                    }
+                },
+                "position": {
+                    "autoHeight": false,
+                    "col": 3,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 13,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "job": "series",
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "redis-metrics": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_keyspace_hits_total",
+                    "options": {
+                        "parameters": [
+                            {
+                                "enumOptions": "1d\n2d\n5d",
+                                "locals": [],
+                                "name": "duration",
+                                "title": "Duration",
+                                "type": "enum",
+                                "value": "2d"
+                            }
+                        ]
+                    },
+                    "query": "query=rate(redis_keyspace_hits_total[5m])\u0026duration={{ duration }}\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {
+                    "duration": {
+                        "mapTo": "duration",
+                        "name": "duration",
+                        "title": "",
+                        "type": "dashboard-level",
+                        "value": null
+                    }
+                },
+                "position": {
+                    "autoHeight": false,
+                    "col": 0,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 45,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "value": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "logiq_redis-Connection_usage",
+                    "options": {
+                        "parameters": [
+                            {
+                                "enumOptions": "1h\n2h\n3h",
+                                "locals": [],
+                                "name": "duration",
+                                "title": "Duration",
+                                "type": "enum",
+                                "value": "1h"
+                            }
+                        ]
+                    },
+                    "query": "query=rate(logiq_redis_connection_usage[5m])\u0026duration={{ duration }}\u0026step=15s"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 0,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 29,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "value": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "AVG-redis_allocator_rss_bytes",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "avg(redis_allocator_rss_bytes)\u0026duration=1h\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 3,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 21,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "job": "series",
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "redis-metrics": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "redis_memory_used_bytes",
+                    "options": {
+                        "parameters": [
+                            {
+                                "enumOptions": "1d\n2d\n6d",
+                                "locals": [],
+                                "name": "duration",
+                                "title": "Duration",
+                                "type": "enum",
+                                "value": "2d"
+                            }
+                        ]
+                    },
+                    "query": "query=rate(redis_memory_used_bytes[5m])\u0026duration={{ duration }}\u0026step=1m"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        },
+        {
+            "options": {
+                "isHidden": false,
+                "parameterMappings": {},
+                "position": {
+                    "autoHeight": false,
+                    "col": 0,
+                    "maxSizeX": 6,
+                    "maxSizeY": 1000,
+                    "minSizeX": 1,
+                    "minSizeY": 5,
+                    "row": 37,
+                    "sizeX": 3,
+                    "sizeY": 8
+                }
+            },
+            "text": "",
+            "visualization": {
+                "name": "Chart",
+                "options": {
+                    "columnMapping": {
+                        "timestamp": "x",
+                        "value": "y"
+                    },
+                    "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/",
+                    "dateTimeFormat": "DD/MM/YY HH:mm",
+                    "defaultColumns": 3,
+                    "defaultRows": 8,
+                    "error_y": {
+                        "type": "data",
+                        "visible": true
+                    },
+                    "globalSeriesType": "line",
+                    "legend": {
+                        "enabled": true
+                    },
+                    "minColumns": 1,
+                    "minRows": 5,
+                    "numberFormat": "0,0[.]00000",
+                    "percentFormat": "0[.]00%",
+                    "series": {
+                        "error_y": {
+                            "type": "data",
+                            "visible": true
+                        },
+                        "stacking": null
+                    },
+                    "seriesOptions": {
+                        "value": {
+                            "index": 0,
+                            "type": "line",
+                            "yAxis": 0,
+                            "zIndex": 0
+                        }
+                    },
+                    "showDataLabels": false,
+                    "sortX": true,
+                    "textFormat": "",
+                    "valuesOptions": {},
+                    "xAxis": {
+                        "labels": {
+                            "enabled": true
+                        },
+                        "type": "-"
+                    },
+                    "yAxis": [
+                        {
+                            "type": "linear"
+                        },
+                        {
+                            "opposite": true,
+                            "type": "linear"
+                        }
+                    ]
+                },
+                "query": {
+                    "data_source_id": 4,
+                    "description": null,
+                    "name": "go_memstats_alloc_bytes",
+                    "options": {
+                        "parameters": []
+                    },
+                    "query": "query=round(go_memstats_alloc_bytes{namespace=\"logiq\",pod=~\"logiq-flash-0|logiq-flash-1\"}/1000000000,0.1)\u0026duration=30m\u0026step=60s"
+                },
+                "type": "CHART"
+            },
+            "width": 1
+        }
+    ]
+}
